@@ -9,7 +9,7 @@
     
     <title>
         
-            Archive: 2021/8 |
+            MQ与RPC |
         
         ManchesterByTheSea
     </title>
@@ -67,7 +67,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/archives"
                             >
                                 ARCHIVES
@@ -111,7 +111,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/archives">ARCHIVES</a>
                 </li>
             
@@ -141,59 +141,188 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="archive-container ">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MQ与RPC</span>
+        </div>
+
         
-<div class="archive-list-container">
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/Liar1zhuang/imagesOcean/main/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20210415153209.3u7p3wpmg5o0.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Pure</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-11-21 22:19:06
+    </span>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[5]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/11/21/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/"
-                        >分库分表</a>
-                        <span class="article-date">11-21</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-                        >设计模式</a>
-                        <span class="article-date">11-21</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/11/21/MQ%E4%B8%8ERPC/"
-                        >MQ与RPC</a>
-                        <span class="article-date">11-21</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/11/21/%E4%B8%AA%E4%BA%BA%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83/"
-                        >个人开发项目管理规范</a>
-                        <span class="article-date">11-21</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/08/15/hello-world/"
-                        >Hello World</a>
-                        <span class="article-date">08-15</span>
-                    </li>
-                
-            </ul>
-        </section>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
     
 </div>
 
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="消息队列（MQ-JMQ）与远程过程调用（RPC-JSF）"><a href="#消息队列（MQ-JMQ）与远程过程调用（RPC-JSF）" class="headerlink" title="消息队列（MQ-JMQ）与远程过程调用（RPC-JSF）"></a>消息队列（MQ-JMQ）与远程过程调用（RPC-JSF）</h2><h3 id="关联："><a href="#关联：" class="headerlink" title="关联："></a>关联：</h3><p>（1）mq和RPC都可以完成上下游之间的通信</p>
+<h3 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h3><h4 id="使用-RPC-的场景："><a href="#使用-RPC-的场景：" class="headerlink" title="使用 RPC 的场景："></a>使用 RPC 的场景：</h4><p>（1）一般都是上游服务需要实时依赖下游服务的返回。（上游强依赖下游的返回结果）</p>
+<h4 id="使用MQ的场景："><a href="#使用MQ的场景：" class="headerlink" title="使用MQ的场景："></a>使用MQ的场景：</h4><p>（1）上游不关心下游的返回结果</p>
+<p>（2）数据驱动的定时任务场景</p>
+<p>使用MQ的优点：</p>
+<ul>
+<li>任务一：上游系统执行时间变短</li>
+<li>任务二：上下游逻辑解耦，物理解耦</li>
+<li>任务三：最重要一点，增加一个下游服务，其只要订阅即可，上游服务无需要改动代码</li>
+</ul>
+<h3 id="RPC的异步处理机制"><a href="#RPC的异步处理机制" class="headerlink" title="RPC的异步处理机制"></a>RPC的异步处理机制</h3><p>影响性能和吞吐量的根本原因：CPU与I/O的速度差异过大</p>
+<p>响应式开发：通过异步的方式提升业务处理的吞吐量，因此作为一个高性能的RPC框架必须要做到异步化</p>
+<p>调用端实现异步：</p>
+<p>1、Dubbo采用的方式是Future（调用服务端之前先创建一个Future对象，存储标识与该Future的映射，响应后根据标识通过代理拿到返回值）</p>
+<p>服务端实现异步：</p>
+<p>1、服务端收到请求的二进制根据协议进行拆包解包（处理网络IO的线程）</p>
+<p>2、将完整消息进行解码并反序列化（网络IO线程）</p>
+<p>3、获得入参参数后通过反射执行业务逻辑（专门的业务线程池）</p>
+<p>以上步骤不在用一个线程中执行（但线程池容易被业务打满）</p>
+<p>服务端异步采取的是一种回调方式，让业务逻辑可以异步处理，之后调用 RPC 框架提供的回调接口，将最终结果异步通知给调用端。这样就实现了RPC调用的全异步。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MQ与RPC</li>
+        <li>Post author：Pure</li>
+        <li>Create time：2021-11-21 22:19:06</li>
+        <li>
+            Post link：https://manchesterbythesea.club/2021/11/21/MQ与RPC/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">设计模式</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/21/%E4%B8%AA%E4%BA%BA%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">个人开发项目管理规范</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: '1b43d5801aca1f19f5fe',
+                    clientSecret: 'dfdba23a976cc53ac8039ff542fb5e9bc3aeb470',
+                    repo: 'Comments',
+                    owner: 'Liar1zhuang',
+                    admin: ['Liar1zhuang'],
+                    id: __gitalk__pathname,
+                    language: 'en'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('false') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
     </div>
 </div>
+
 
                 
             </div>
@@ -235,6 +364,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
